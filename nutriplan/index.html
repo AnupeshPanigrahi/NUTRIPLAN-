@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NutriPlan — Smart Food, Better Health</title>
+<meta name="description" content="NutriPlan: budget-friendly meal plans, food fortification ideas, leftover recipes, patient care tools and an AI helper for every age.">
+<meta name="theme-color" content="#1F7A4D">
+<meta property="og:title" content="NutriPlan — Smart Food, Better Health">
+<meta property="og:description" content="Plan meals, fortify food, reuse leftovers, track your care and talk to a doctor.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+<div class="splash" aria-hidden="true"><div><div class="sl">🌱</div><h2>NutriPlan</h2><p>Smart Food, Better Health</p></div></div>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">🌱</div>
+      <div><b>NutriPlan</b><span>Smart Food, Better Health</span></div>
+    </div>
+    <div class="hright">
+      <details class="comfort" id="comfort">
+        <summary class="pillbtn" aria-label="Comfort settings: text size, contrast, dark mode">Aa Comfort</summary>
+        <div class="cpanel">
+          <div class="r"><span>Text size</span>
+            <div class="seg" role="group" aria-label="Text size">
+              <button type="button" data-size="100" aria-pressed="true" aria-label="Normal text">A</button>
+              <button type="button" data-size="120" aria-pressed="false" aria-label="Large text" style="font-size:1.15rem">A</button>
+              <button type="button" data-size="140" aria-pressed="false" aria-label="Extra large text" style="font-size:1.35rem">A</button>
+            </div></div>
+          <div class="r"><span>High contrast</span><button type="button" class="pillbtn" id="contrastBtn" aria-pressed="false">Off</button></div>
+          <div class="r"><span>Dark mode (saves screen energy)</span><button type="button" class="pillbtn" id="themeBtn" aria-pressed="false">Off</button></div>
+        </div>
+      </details>
+      <button type="button" class="pillbtn" id="logoutBtn" hidden>Log out</button>
+    </div>
+  </header>
+
+  <!-- AUTH -->
+  <main id="v-auth" class="view on" aria-label="Login and register">
+    <div class="authgrid">
+      <div class="hero">
+        <div class="floaty" aria-hidden="true"><span>🥕</span><span>🍎</span><span>🌾</span><span>🥑</span><span>🫘</span></div>
+        <h1>Better food for every age, kinder to the planet.</h1>
+        <p>Plan meals for your budget, make food more nutritious, cook with leftovers, and talk to a doctor. All in one simple place.</p>
+        <ul class="feat">
+          <li><span class="e" aria-hidden="true">🥗</span><span><b>Food plan.</b> Meals that fit your body and budget.</span></li>
+          <li><span class="e" aria-hidden="true">🌾</span><span><b>Fortify.</b> Scan a food and see how to make it healthier.</span></li>
+          <li><span class="e" aria-hidden="true">♻️</span><span><b>Reuse.</b> Turn leftovers into meals and cut food waste.</span></li>
+          <li><span class="e" aria-hidden="true">🩺</span><span><b>Doctor.</b> Book a consultation with a sample doctor.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="tabs" role="tablist">
+          <button type="button" role="tab" id="tabLogin" aria-selected="true">Log in</button>
+          <button type="button" role="tab" id="tabReg" aria-selected="false">Register</button>
+        </div>
+
+        <form id="loginForm" novalidate>
+          <label class="f" for="lEmail">Email</label>
+          <input id="lEmail" type="email" autocomplete="email" inputmode="email">
+          <label class="f" for="lPass">Password</label>
+          <input id="lPass" type="password" autocomplete="current-password">
+          <div class="chk"><input type="checkbox" id="lShow"><label for="lShow">Show password</label></div>
+          <div class="err" id="lErr" role="alert"></div>
+          <button class="btn block" type="submit">Log in</button>
+        </form>
+
+        <form id="regForm" novalidate hidden>
+          <label class="f" for="rName">Your name</label>
+          <input id="rName" type="text" autocomplete="name">
+          <label class="f" for="rEmail">Email</label>
+          <input id="rEmail" type="email" autocomplete="email" inputmode="email">
+          <label class="f" for="rAge">Age (years)</label>
+          <input id="rAge" type="number" min="5" max="110" inputmode="numeric">
+          <div class="chk" id="guardRow" hidden><input type="checkbox" id="rGuard"><label for="rGuard">A parent or guardian is helping me sign up.</label></div>
+          <label class="f" for="rPass">Password (at least 6 characters)</label>
+          <input id="rPass" type="password" autocomplete="new-password">
+          <label class="f" for="rPass2">Type the password again</label>
+          <input id="rPass2" type="password" autocomplete="new-password">
+          <div class="chk"><input type="checkbox" id="rShow"><label for="rShow">Show passwords</label></div>
+          <div class="err" id="rErr" role="alert"></div>
+          <button class="btn block" type="submit">Create my account</button>
+        </form>
+
+        <button class="btn alt block" type="button" id="demoBtn" style="margin-top:12px">Try the demo account</button>
+        <div class="note">Demo prototype: accounts are saved only in this browser and are not secure. A real version needs a proper server and password protection.</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- HOME -->
+  <main id="v-home" class="view" aria-label="Home"></main>
+
+  <!-- FOOD PLAN -->
+  <main id="v-food" class="view" aria-label="Food plan">
+    <div class="card" style="background:var(--t-food);border-color:transparent">
+      <h2 style="color:var(--a-food)">🥗 Food plan</h2>
+      <p class="muted" style="margin:4px 0 0">Tell us about you. We'll suggest breakfast, lunch, snack and dinner that fit your calories and monthly budget.</p>
+    </div>
+    <form class="card" id="planForm" novalidate>
+      <div class="row2">
+        <div><label class="f" for="pAge">Age</label><input id="pAge" type="number" min="5" max="110" inputmode="numeric"></div>
+        <div><label class="f" for="pSex">Sex</label><select id="pSex"><option value="f">Female</option><option value="m">Male</option></select></div>
+        <div><label class="f" for="pH">Height (cm)</label><input id="pH" type="number" min="90" max="230" inputmode="numeric"></div>
+        <div><label class="f" for="pW">Weight (kg)</label><input id="pW" type="number" min="15" max="250" inputmode="decimal"></div>
+      </div>
+      <label class="f" for="pAct">How active are you?</label>
+      <select id="pAct">
+        <option value="1.2">Mostly sitting</option><option value="1.375">Light activity (short walks)</option>
+        <option value="1.55" selected>Moderate (exercise 3 to 5 days)</option><option value="1.725">Very active</option>
+      </select>
+      <label class="f" for="pDiet">Food preference</label>
+      <select id="pDiet"><option value="0">Vegan</option><option value="1" selected>Vegetarian</option><option value="2">Vegetarian + eggs</option><option value="3">Non-vegetarian</option></select>
+      <label class="f" for="pGoal">Goal</label>
+      <select id="pGoal"><option value="keep">Stay at my weight</option><option value="gain">Gain a little weight</option><option value="lose" id="loseOpt">Lose a little weight</option></select>
+      <fieldset style="border:0;padding:0;margin:10px 0 0">
+        <legend style="font-weight:600">Health needs (optional)</legend>
+        <div class="chips" id="condChips">
+          <button type="button" class="tchip" data-c="diabetes" aria-pressed="false">Diabetes</button>
+          <button type="button" class="tchip" data-c="bp" aria-pressed="false">High blood pressure</button>
+          <button type="button" class="tchip" data-c="anaemia" aria-pressed="false">Low iron / anaemia</button>
+        </div>
+        <div class="hint">Used to pick suitable dishes. Saved only on this device in My care.</div>
+      </fieldset>
+      <div class="row2">
+        <div><label class="f" for="pBud">Food budget per month (₹)</label><input id="pBud" type="number" min="300" inputmode="numeric" value="4500"></div>
+        <div><label class="f" for="pSpend">Now spending per month (₹)</label><input id="pSpend" type="number" min="0" inputmode="numeric" value="6000"></div>
+      </div>
+      <fieldset style="border:0;padding:0;margin:10px 0 0">
+        <legend style="font-weight:600">Food you already have (optional)</legend>
+        <div class="chips" id="pantryChips"></div>
+        <div class="hint">Dishes using these cost less in your plan.</div>
+      </fieldset>
+      <div class="err" id="pErr" role="alert"></div>
+      <button class="btn block" type="submit">Make my day plan</button>
+    </form>
+    <div id="planOut"></div>
+  </main>
+
+  <!-- FORTIFY -->
+  <main id="v-fort" class="view" aria-label="Fortify">
+    <div class="card" style="background:var(--t-fort);border-color:transparent">
+      <h2 style="color:var(--a-fort)">🌾 Fortify: scan and improve</h2>
+      <p class="muted" style="margin:4px 0 0">Pick a food to scan. We'll show its nutrition, the gaps, and how to improve it with low-cost millets, pulses and seeds.</p>
+    </div>
+    <div class="card">
+      <h3>Scan a food</h3>
+      <div class="row2" style="margin-top:8px">
+        <button class="btn alt" type="button" id="fPhotoBtn">📷 Take or upload photo</button>
+        <button class="btn alt" type="button" id="fCodeBtn">▦ Try a barcode</button>
+      </div>
+      <input type="file" id="fPhoto" accept="image/*" capture="environment" hidden>
+      <div id="fPreviewWrap" hidden style="margin-top:10px"><img id="fPreview" alt="Your photo" style="max-width:100%;max-height:220px;border-radius:.8rem"></div>
+      <p class="muted small" id="fMsg" style="margin:10px 0 0">Demo library: tap a food to scan it.</p>
+      <div class="chips" id="fFoods"></div>
+      <div class="note">Demo: recognition is simulated on 6 sample foods. A full version would use a food-recognition service, barcode database and label reader.</div>
+    </div>
+    <div id="fortOut"></div>
+  </main>
+
+  <!-- REUSE -->
+  <main id="v-reuse" class="view" aria-label="Reuse leftovers">
+    <div class="card" style="background:var(--t-reuse);border-color:transparent">
+      <h2 style="color:var(--a-reuse)">♻️ Reuse leftovers</h2>
+      <p class="muted" style="margin:4px 0 0">Choose what is left in your kitchen. We'll suggest meals, plus the money saved and food waste avoided.</p>
+    </div>
+    <div class="card">
+      <button class="btn alt" type="button" id="rPhotoBtn">📷 Add a photo of your leftovers (optional)</button>
+      <input type="file" id="rPhoto" accept="image/*" capture="environment" hidden>
+      <div id="rPreviewWrap" hidden style="margin-top:10px"><img id="rPreview" alt="Your leftovers" style="max-width:100%;max-height:200px;border-radius:.8rem"></div>
+      <h3 style="margin-top:14px">What do you have?</h3>
+      <div class="chips" id="leftChips"></div>
+      <button class="btn block" type="button" id="findBtn" style="margin-top:14px">Find meal ideas</button>
+      <div class="err" id="reErr" role="alert"></div>
+    </div>
+    <div id="reuseOut"></div>
+  </main>
+
+  <!-- CARE -->
+  <main id="v-care" class="view" aria-label="My care">
+    <div class="card" style="background:var(--t-care);border-color:transparent">
+      <h2 style="color:var(--a-care)">💗 My care</h2>
+      <p class="muted" style="margin:4px 0 0">Keep your health details, readings and medicines in one place, and get ready for doctor visits.</p>
+      <div class="note">Saved only on this device, not on a server. <button type="button" class="btn alt sm" id="wipeBtn" style="margin-top:6px">Delete my health data</button></div>
+    </div>
+
+    <div class="card">
+      <h2>Health passport</h2>
+      <div class="row2">
+        <div><label class="f" for="cBlood">Blood group</label>
+          <select id="cBlood"><option value="">Not sure</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>O+</option><option>O-</option><option>AB+</option><option>AB-</option></select></div>
+        <div><label class="f" for="cAllergy">Allergies</label><input id="cAllergy" type="text" placeholder="Example: peanuts, penicillin"></div>
+        <div><label class="f" for="cName">Emergency contact name</label><input id="cName" type="text"></div>
+        <div><label class="f" for="cPhone">Emergency contact phone</label><input id="cPhone" type="tel" inputmode="tel"></div>
+      </div>
+      <label class="f">Health conditions</label>
+      <div class="chips" id="careConds"></div>
+      <div class="hint">These also help your food plan choose suitable dishes.</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center"><button type="button" class="btn" id="cSave">Save</button><span id="cCall"></span></div>
+      <h3 style="margin-top:16px">Find care near you</h3>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+        <a class="btn alt sm" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=hospitals+near+me">🏥 Hospitals</a>
+        <a class="btn alt sm" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=pharmacy+near+me">💊 Pharmacies</a>
+        <a class="btn alt sm" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=clinic+near+me">🩺 Clinics</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Health readings</h2>
+      <label class="f" for="vType">What did you measure?</label>
+      <select id="vType"><option value="bp">Blood pressure</option><option value="sugar">Blood sugar</option><option value="wt">Weight</option></select>
+      <div id="vFields"></div>
+      <div class="err" id="vErr" role="alert"></div>
+      <button type="button" class="btn block" id="vAdd">Save reading</button>
+      <div id="vAlert" role="alert" style="margin-top:10px"></div>
+      <h3 style="margin-top:14px">Recent readings</h3>
+      <div id="vList"></div>
+      <div id="vChart"></div>
+      <button type="button" class="btn gold block" id="readAI" style="margin-top:10px">✨ Explain my readings in simple words</button>
+      <div class="aiout" id="readOut" hidden></div>
+      <div class="note">Ranges are general guides. Your doctor may set different targets for you.</div>
+    </div>
+
+    <div class="card">
+      <h2>Medicines</h2>
+      <p class="muted small" style="margin:2px 0 0">A reminder list only. Always follow your doctor's prescription.</p>
+      <div id="medToday"></div>
+      <h3 style="margin-top:16px">Add a medicine</h3>
+      <div class="row2">
+        <div><label class="f" for="mName">Medicine name</label><input id="mName" type="text"></div>
+        <div><label class="f" for="mDose">Dose</label><input id="mDose" type="text" placeholder="Example: 500 mg"></div>
+      </div>
+      <label class="f" for="mFood">With food?</label>
+      <select id="mFood"><option value="">Any time</option><option>Before food</option><option>After food</option></select>
+      <label class="f">When do you take it?</label>
+      <div class="chips" id="mTimeChips"></div>
+      <div class="err" id="mErr" role="alert"></div>
+      <button type="button" class="btn block" id="mAdd">Add medicine</button>
+    </div>
+
+    <div class="card">
+      <h2>Get ready for a doctor visit</h2>
+      <label class="f" for="qIn">Questions I want to ask</label>
+      <div class="aibox"><input id="qIn" type="text" placeholder="Type a question"><button type="button" class="btn" id="qAdd">Add</button></div>
+      <div id="qList"></div>
+      <button type="button" class="btn gold block" id="visitAI" style="margin-top:12px">✨ Prepare my visit note</button>
+      <div class="aiout" id="visitOut" hidden></div>
+      <button type="button" class="btn alt block" id="visitCopy" style="margin-top:8px" hidden>Copy note</button>
+      <button type="button" class="btn alt block" id="toDocBtn" style="margin-top:8px">Book a consultation</button>
+    </div>
+  </main>
+
+  <!-- DOCTOR -->
+  <main id="v-doc" class="view" aria-label="Doctor consultation">
+    <div class="card" style="background:var(--t-doc);border-color:transparent">
+      <h2 style="color:var(--a-doc)">🩺 Doctor consultation</h2>
+      <p class="muted" style="margin:4px 0 0">Book a chat, call or video visit. You can share your food plan with the doctor.</p>
+    </div>
+    <div class="emerg">In an emergency, do not wait for a booking. Call 112 (India) or go to the nearest hospital.</div>
+    <div class="card">
+      <h3>1. Choose a doctor</h3>
+      <div class="hint" id="docSuggest"></div>
+      <div class="docs" id="docList"></div>
+      <div class="note">Sample profiles for this demo. No real doctor is contacted and no real appointment is made.</div>
+    </div>
+    <div class="card" id="bookCard">
+      <h3>2. Pick how and when</h3>
+      <label class="f" style="margin-top:6px">How would you like to meet?</label>
+      <div class="chips" id="modeChips"></div>
+      <label class="f">Day</label>
+      <div class="days" id="dayList"></div>
+      <label class="f">Time</label>
+      <div class="slots" id="slotList"></div>
+      <label class="f" for="dReason">What would you like help with?</label>
+      <textarea id="dReason" placeholder="Example: I want advice on a low-sugar diet."></textarea>
+      <div class="chk"><input type="checkbox" id="dShare"><label for="dShare">Share my food plan and health summary with the doctor</label></div>
+      <div class="hint" id="shareHint"></div>
+      <div class="err" id="dErr" role="alert"></div>
+      <button class="btn block" type="button" id="bookBtn">Confirm consultation</button>
+    </div>
+    <div class="card"><h3>My consultations</h3><div id="myBookings"></div></div>
+  </main>
+</div>
+
+<nav id="mainnav" aria-label="Main">
+  <button type="button" data-v="home"><span class="ic" aria-hidden="true">🏠</span>Home</button>
+  <button type="button" data-v="food"><span class="ic" aria-hidden="true">🥗</span>Food plan</button>
+  <button type="button" data-v="fort"><span class="ic" aria-hidden="true">🌾</span>Fortify</button>
+  <button type="button" data-v="reuse"><span class="ic" aria-hidden="true">♻️</span>Reuse</button>
+  <button type="button" data-v="care"><span class="ic" aria-hidden="true">💗</span>Care</button>
+  <button type="button" data-v="doc"><span class="ic" aria-hidden="true">🩺</span>Doctor</button>
+</nav>
+<footer class="eco-foot">Eco-light page: no images, no trackers, system fonts. Dark mode saves screen energy. Values are estimates for learning, not medical advice.</footer>
+<button type="button" class="aifab" id="aiFab" aria-haspopup="dialog"><span aria-hidden="true">✨</span> Ask AI</button>
+<section class="aisheet" id="aiSheet" role="dialog" aria-label="AI helper">
+  <div class="aihead"><b>✨ AI helper</b>
+    <div style="display:flex;gap:6px"><button type="button" class="pillbtn" id="aiSpeak" aria-label="Read last answer aloud">🔊</button><button type="button" class="pillbtn" id="aiClose">Close</button></div></div>
+  <div class="aimsgs" id="aiMsgs" aria-live="polite"></div>
+  <div class="aibar">
+    <div class="qp" id="aiQuick"></div>
+    <div class="row2" style="margin-bottom:8px;align-items:center">
+      <div><label class="sr" for="aiLang">Reply language</label>
+        <select id="aiLang"><option>English</option><option value="Hindi">हिन्दी (Hindi)</option><option value="Odia">ଓଡ଼ିଆ (Odia)</option><option value="Kannada">ಕನ್ನಡ (Kannada)</option><option value="Telugu">తెలుగు (Telugu)</option><option value="Tamil">தமிழ் (Tamil)</option><option value="Bengali">বাংলা (Bengali)</option></select></div>
+      <label class="chk" style="margin:0"><input type="checkbox" id="aiPers"><span class="small">Use my health details</span></label>
+    </div>
+    <div class="aibox"><textarea id="aiIn" rows="1" placeholder="Ask about food, leftovers or your readings" aria-label="Your question"></textarea><button type="button" class="btn" id="aiSend">Send</button></div>
+    <div class="hint" id="aiStatus"></div>
+    <div class="hint">AI can make mistakes and is not a doctor. Please don't type your name or phone number.</div>
+  </div>
+</section>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="/assets/app.js"></script>
+</body>
+</html>

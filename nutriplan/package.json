@@ -1,0 +1,12 @@
+{
+  "name": "nutriplan",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NutriPlan: Smart Food, Better Health. Meal plans, fortification ideas, leftover recipes, patient care tools and an AI helper.",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "license": "MIT"
+}
