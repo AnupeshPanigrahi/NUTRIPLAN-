@@ -8,7 +8,7 @@
  * The system prompt also lives here, so visitors cannot replace the safety rules.
  */
 
-const API_URL = "https://api.anthropic.com/v1/messages";
+const API_URL = "https://api.openai.com/v1/chat/completions";
 const MODELS = {
   quick: process.env.MODEL_QUICK || "claude-haiku-4-5-20251001",
   default: process.env.MODEL_DEFAULT || "claude-sonnet-5-5",
@@ -67,7 +67,7 @@ function validate(body) {
 
 module.exports = async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
-  const key = process.env.ANTHROPIC_API_KEY;
+  const key = process.env.OPENAI_API_KEY;
 
   if (req.method === "GET") return res.status(200).json({ ok: true, configured: Boolean(key) });
   if (req.method !== "POST") {
