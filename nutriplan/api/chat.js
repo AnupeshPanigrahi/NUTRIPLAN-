@@ -10,8 +10,8 @@
 
 const API_URL = "https://api.openai.com/v1/chat/completions";
 const MODELS = {
-  quick: process.env.MODEL_QUICK || "claude-haiku-4-5-20251001",
-  default: process.env.MODEL_DEFAULT || "claude-sonnet-5-5",
+  quick: process.env.MODEL_QUICK || "gpt-5.6-luna",
+  default: process.env.MODEL_DEFAULT || "gpt-5.6-luna",
 };
 const MAX_TOKENS = { quick: 700, default: 1200 };
 
